@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GN Amoblamientos</title>
+  <title>GN_amoblamientos</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     .carrito-icono {
       position: fixed;
@@ -21,21 +19,43 @@
       font-weight: bold;
       z-index: 50;
     }
+    .contacto-flotante {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      padding: 1rem;
+      z-index: 40;
+    }
+    .contacto-flotante a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+  <!-- Carrito flotante -->
   <a href="carrito.html" class="carrito-icono">
     🛒 <span id="cart-count">0</span>
   </a>
 
+  <!-- Encabezado -->
   <header class="bg-gray-900 text-white text-center py-6 mb-4">
-    <h1 class="text-4xl font-bold">GN Amoblamientos</h1>
+    <h1 class="text-4xl font-bold">GN_amoblamientos</h1>
   </header>
 
+  <!-- Buscador -->
   <section class="max-w-4xl mx-auto px-4 mb-6">
     <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
   </section>
 
+  <!-- Filtros -->
   <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
     <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
       <option value="">Todas las categorías</option>
@@ -50,59 +70,32 @@
     </select>
   </section>
 
-  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
-
-  <a href="#contacto" class="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-green-700 z-50">📩 Contacto</a>
-
-  <section id="contacto" class="bg-white py-10 px-4 max-w-3xl mx-auto shadow-md rounded-lg mb-16">
-    <h2 class="text-2xl font-bold mb-4">Contacto</h2>
-    <form class="space-y-4">
-      <input type="text" placeholder="Nombre" class="w-full p-2 border rounded" required />
-      <input type="email" placeholder="Correo electrónico" class="w-full p-2 border rounded" required />
-      <textarea placeholder="Mensaje" class="w-full p-2 border rounded" rows="5" required></textarea>
-      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enviar</button>
-    </form>
+  <!-- Productos -->
+  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-24">
+    <!-- Productos generados por JS -->
   </section>
 
+  <!-- Contacto flotante -->
+  <div class="contacto-flotante">
+    <a href="https://wa.me/5491123456789" target="_blank"><i class="fab fa-whatsapp text-green-500"></i> WhatsApp</a>
+    <a href="mailto:contacto@gnamoblamientos.com"><i class="fas fa-envelope text-blue-500"></i> Email</a>
+    <a href="tel:+541123456789"><i class="fas fa-phone text-gray-700"></i> Teléfono</a>
+    <a href="https://www.instagram.com/gn_amoblamientos" target="_blank"><i class="fab fa-instagram text-pink-500"></i> Instagram</a>
+  </div>
+
   <script>
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_AUTH_DOMAIN",
-      databaseURL: "TU_DATABASE_URL",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_STORAGE_BUCKET",
-      messagingSenderId: "TU_SENDER_ID",
-      appId: "TU_APP_ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    let userId = null;
-    let carrito = [];
     const productos = [
-      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/300" },
-      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/300" },
-      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/300" },
-      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/300" },
-      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/300" },
-      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/300" },
-    ,
-  { id: 7, nombre: "Sillón Relax", categoria: "Sillas", precio: 52000, imagen: "https://via.placeholder.com/300?text=Sillón+Relax" },
-  { id: 8, nombre: "Mesa Ratona", categoria: "Mesas", precio: 35000, imagen: "https://via.placeholder.com/300?text=Mesa+Ratona" },
-  { id: 9, nombre: "Escritorio Ejecutivo", categoria: "Escritorios", precio: 92000, imagen: "https://via.placeholder.com/300?text=Escritorio+Ejecutivo" },
-  { id: 10, nombre: "Silla Gamer", categoria: "Sillas", precio: 68000, imagen: "https://via.placeholder.com/300?text=Silla+Gamer" },
-  { id: 11, nombre: "Mesa Extensible", categoria: "Mesas", precio: 85000, imagen: "https://via.placeholder.com/300?text=Mesa+Extensible" },
-  { id: 12, nombre: "Escritorio Angular", categoria: "Escritorios", precio: 77000, imagen: "https://via.placeholder.com/300?text=Escritorio+Angular" },
-  { id: 13, nombre: "Silla Industrial", categoria: "Sillas", precio: 49000, imagen: "https://via.placeholder.com/300?text=Silla+Industrial" },
-  { id: 14, nombre: "Mesa de Vidrio", categoria: "Mesas", precio: 88000, imagen: "https://via.placeholder.com/300?text=Mesa+de+Vidrio" },
-  { id: 15, nombre: "Escritorio Escandinavo", categoria: "Escritorios", precio: 91000, imagen: "https://via.placeholder.com/300?text=Escritorio+Escandinavo" },
-  { id: 16, nombre: "Silla Tapizada", categoria: "Sillas", precio: 51000, imagen: "https://via.placeholder.com/300?text=Silla+Tapizada" },
-  { id: 17, nombre: "Mesa Robusta", categoria: "Mesas", precio: 93000, imagen: "https://via.placeholder.com/300?text=Mesa+Robusta" },
-  { id: 18, nombre: "Escritorio Moderno", categoria: "Escritorios", precio: 97000, imagen: "https://via.placeholder.com/300?text=Escritorio+Moderno" }];
+      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://images.unsplash.com/photo-1615874959474-d609969a75e4" },
+      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://images.unsplash.com/photo-1598300054361-21f7c90cd70e" },
+      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://images.unsplash.com/photo-1581349485300-5400e3dbcc08" },
+      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90" },
+      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://images.unsplash.com/photo-1616627455421-3ed546bae2b8" },
+      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://images.unsplash.com/photo-1621986213154-01e334e7e7ae" }
+    ];
 
     const contenedor = document.getElementById("productos");
     const cartCount = document.getElementById("cart-count");
+    let carrito = [];
 
     function renderProductos() {
       contenedor.innerHTML = "";
@@ -111,61 +104,34 @@
       const precioFiltro = document.getElementById("filter-price").value;
 
       productos.filter(p => {
-        return (!search || p.nombre.toLowerCase().includes(search)) &&
+        return (
+          (!search || p.nombre.toLowerCase().includes(search)) &&
           (!categoria || p.categoria === categoria) &&
-          (!precioFiltro || (precioFiltro === "low" ? p.precio < 50000 : p.precio >= 50000));
+          (!precioFiltro || (precioFiltro === "low" ? p.precio < 50000 : p.precio >= 50000))
+        );
       }).forEach(p => {
         const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center transition transform hover:scale-105 hover:shadow-xl duration-300";
+        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center hover:shadow-lg transition-shadow";
         card.innerHTML = `
           <img src="${p.imagen}" class="w-full h-48 object-cover mb-4 rounded" />
-          <h3 class="text-xl font-semibold mb-1">${p.nombre}</h3>
-          <p class="text-gray-500 text-sm mb-2">Elegante y funcional</p>
-          <p class="mb-1 text-gray-800 font-bold">$${p.precio.toLocaleString()}</p>
-          <p class="mb-2 text-green-600 text-sm">o 3 cuotas de $${Math.ceil(p.precio / 3).toLocaleString()}</p>
-          <div class="flex gap-2">
-            <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
-            <a href="producto.html?id=${p.id}" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm">Ver más</a>
-          </div>
+          <h3 class="text-xl font-semibold mb-2">${p.nombre}</h3>
+          <p class="mb-2 text-gray-600">$${p.precio.toLocaleString()}</p>
+          <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
         `;
         contenedor.appendChild(card);
       });
     }
 
-    function guardarCarritoEnFirebase() {
-      if (userId) {
-        db.ref('carritos/' + userId).set(carrito);
-      }
-    }
-
     function agregarAlCarrito(id) {
       carrito.push(id);
       cartCount.textContent = carrito.length;
-      guardarCarritoEnFirebase();
     }
 
     document.getElementById("search").addEventListener("input", renderProductos);
     document.getElementById("filter-category").addEventListener("change", renderProductos);
     document.getElementById("filter-price").addEventListener("change", renderProductos);
 
-    firebase.auth().signInAnonymously().then(user => {
-      userId = user.user.uid;
-      db.ref('carritos/' + userId).once('value').then(snapshot => {
-        carrito = snapshot.val() || [];
-        cartCount.textContent = carrito.length;
-      });
-      renderProductos();
-    });
+    renderProductos();
   </script>
-
-  
-  
-  <div class="fixed bottom-4 right-4 bg-white shadow-lg p-4 rounded-lg z-50 text-sm space-y-2">
-    <div><span class="mr-1">📞</span><a href="tel:+541112345678" class="hover:underline">+54 11 1234-5678</a></div>
-    <div><span class="mr-1">📧</span><a href="mailto:contacto@gnamoblamientos.com" class="hover:underline">contacto@gnamoblamientos.com</a></div>
-    <div><span class="mr-1">📷</span><a href="https://instagram.com/gnamoblamientos" target="_blank" class="hover:underline">@gnamoblamientos</a></div>
-    <div><span class="mr-1">💬</span><a href="https://wa.me/5491123456789?text=Hola!%20Estoy%20interesado%20en%20los%20productos%20de%20GN%20Amoblamientos" target="_blank" class="hover:underline text-green-600 font-semibold">Enviar WhatsApp</a></div>
-  </div>
-
 </body>
 </html>
