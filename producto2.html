@@ -12,11 +12,29 @@
                 background-color: #f9f9f9;
                 color: #333;
                 margin: 0;
+                padding: 0;
+            }
+            header {
+                background-color: #000;
+                color: white;
+                text-align: center;
                 padding: 2rem;
+            }
+            nav {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                background-color: #2c3e50;
+                padding: 1rem;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
             }
             .container {
                 max-width: 800px;
-                margin: auto;
+                margin: 2rem auto;
                 background-color: #fff;
                 border-radius: 10px;
                 padding: 2rem;
@@ -59,12 +77,21 @@
         </style>
     </head>
     <body>
+        <header>
+            <h1>gn_amoblamientos</h1>
+            <p>Diseño, calidad y confort para tu hogar</p>
+        </header>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="../index.html#catalogo">Catálogo</a>
+            <a href="../index.html#contacto">Contacto</a>
+            <a href="../finalizar-compra.html" style="margin-left: auto; background-color: #27ae60; padding: 0.4rem 1rem; border-radius: 6px; color: white;">🛒 Carrito</a>
+        </nav>
         <div class="container">
             <img src="https://via.placeholder.com/800x400" alt="Comedor 6 puestos" class="producto-img" />
             <h1>Comedor 6 puestos</h1>
             <p>Elegancia para compartir en familia.</p>
             <p class="precio">$850</p>
-            <a href="../index.html" class="btn">Volver a la tienda</a>
             <button class="btn btn-comprar comprar" data-nombre="Comedor 6 puestos" data-precio="$850">Agregar al carrito</button>
         </div>
     </body>
