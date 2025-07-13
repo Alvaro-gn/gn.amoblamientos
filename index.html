@@ -2,199 +2,143 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>GN Amoblamientos</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #fff;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        .cart-icon {
-            position: relative;
-            cursor: pointer;
-        }
-        .cart-count {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background-color: #333;
-            color: #fff;
-            font-size: 0.7rem;
-            border-radius: 50%;
-            padding: 2px 5px;
-        }
-        main {
-            padding: 2rem;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .product-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .product-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .product-details {
-            padding: 1rem;
-        }
-        .product-name {
-            font-weight: 600;
-            font-size: 1rem;
-            margin: 0.2rem 0;
-        }
-        .product-type {
-            font-size: 0.9rem;
-            color: #777;
-        }
-        .price-group {
-            margin: 0.8rem 0;
-        }
-        .price-cuotas {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        .price-transf {
-            color: #4CAF50;
-            font-size: 0.95rem;
-        }
-        .buy-buttons {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .btn {
-            padding: 0.6rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-        .btn.buy {
-            background-color: #333;
-            color: white;
-        }
-        .btn.buy:hover {
-            background-color: #111;
-        }
-        .btn.delivery {
-            background-color: #007BFF;
-            color: white;
-        }
-        .btn.delivery:hover {
-            background-color: #0056b3;
-        }
-    </style>
-    <script>
-        let cartCount = 0;
-        function addToCart(name) {
-            cartCount++;
-            document.getElementById("cartCount").innerText = cartCount;
-            alert(`"${name}" fue agregado al carrito.`);
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GN Amoblamientos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <style>
+    .carrito-icono {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: #1f2937;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: bold;
+      z-index: 50;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <h1>GN Amoblamientos</h1>
-        <div class="cart-icon">
-            🛒 <span id="cartCount" class="cart-count">0</span>
-        </div>
-    </header>
-    <main>
-        <section class="product-grid">
-            <!-- Producto 1 -->
-            <div class="product-card">
-                <img src="https://i.imgur.com/Iu2mIpi.jpg" alt="Lullaby">
-                <div class="product-details">
-                    <p class="product-name">Lullaby</p>
-                    <p class="product-type">Sofá Cama - 2 y 1/2 plazas</p>
-                    <div class="price-group">
-                        <p class="price-cuotas">12 cuotas sin interés: $5.698.971</p>
-                        <p class="price-transf">Transferencia: $4.274.228</p>
-                    </div>
-                    <div class="buy-buttons">
-                        <button class="btn delivery">ENTREGA INMEDIATA</button>
-                        <button class="btn buy" onclick="addToCart('Lullaby')">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <img src="https://i.imgur.com/E7ECwVD.jpg" alt="Alaska">
-                <div class="product-details">
-                    <p class="product-name">Alaska</p>
-                    <p class="product-type">Sofá Cama - 2 plazas</p>
-                    <div class="price-group">
-                        <p class="price-cuotas">12 cuotas sin interés: $4.081.100</p>
-                        <p class="price-transf">Transferencia: $3.060.825</p>
-                    </div>
-                    <div class="buy-buttons">
-                        <button class="btn delivery">ENTREGA INMEDIATA</button>
-                        <button class="btn buy" onclick="addToCart('Alaska')">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 3 -->
-            <div class="product-card">
-                <img src="https://i.imgur.com/2KIdnD0.jpg" alt="Giovane">
-                <div class="product-details">
-                    <p class="product-name">Giovane</p>
-                    <p class="product-type">Convertible Cama - 1 plaza</p>
-                    <div class="price-group">
-                        <p class="price-cuotas">12 cuotas sin interés: $1.186.667</p>
-                        <p class="price-transf">Transferencia: $890.000</p>
-                    </div>
-                    <div class="buy-buttons">
-                        <button class="btn delivery">ENTREGA INMEDIATA</button>
-                        <button class="btn buy" onclick="addToCart('Giovane')">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+<body class="bg-gray-100 text-gray-800">
+  <a href="carrito.html" class="carrito-icono">
+    🛒 <span id="cart-count">0</span>
+  </a>
 
-    <footer style="background:#333;color:#fff;padding:2rem;text-align:center;margin-top:2rem;">
-        <h2 style="margin-bottom: 1rem;">Contacto</h2>
-        <p>Teléfono: <a href="tel:+5491123456789" style="color:#fff;">+54 9 11 2345-6789</a></p>
-        <p>Email: <a href="mailto:info@gnamoblamientos.com" style="color:#fff;">info@gnamoblamientos.com</a></p>
-        <p>Dirección: Av. Siempre Viva 123, CABA</p>
-        <p>
-            <a href="https://wa.me/5491123456789" style="color:#4CAF50;font-weight:bold;text-decoration:none;" target="_blank">
-                Contactar por WhatsApp
-            </a>
-        </p>
-    </footer>
+  <header class="bg-gray-900 text-white text-center py-6 mb-4">
+    <h1 class="text-4xl font-bold">GN Amoblamientos</h1>
+  </header>
+
+  <section class="max-w-4xl mx-auto px-4 mb-6">
+    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
+    <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
+      <option value="">Todas las categorías</option>
+      <option value="Sillas">Sillas</option>
+      <option value="Mesas">Mesas</option>
+      <option value="Escritorios">Escritorios</option>
+    </select>
+    <select id="filter-price" class="p-2 border rounded w-full md:w-1/2">
+      <option value="">Todos los precios</option>
+      <option value="low">Menor a $50.000</option>
+      <option value="high">Mayor a $50.000</option>
+    </select>
+  </section>
+
+  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
+
+  <a href="#contacto" class="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-green-700 z-50">📩 Contacto</a>
+
+  <section id="contacto" class="bg-white py-10 px-4 max-w-3xl mx-auto shadow-md rounded-lg mb-16">
+    <h2 class="text-2xl font-bold mb-4">Contacto</h2>
+    <form class="space-y-4">
+      <input type="text" placeholder="Nombre" class="w-full p-2 border rounded" required />
+      <input type="email" placeholder="Correo electrónico" class="w-full p-2 border rounded" required />
+      <textarea placeholder="Mensaje" class="w-full p-2 border rounded" rows="5" required></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enviar</button>
+    </form>
+  </section>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      databaseURL: "TU_DATABASE_URL",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_STORAGE_BUCKET",
+      messagingSenderId: "TU_SENDER_ID",
+      appId: "TU_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let userId = null;
+    let carrito = [];
+    const productos = [
+      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/300" },
+      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/300" },
+      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/300" },
+      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/300" },
+      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/300" },
+      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/300" },
+    ];
+
+    const contenedor = document.getElementById("productos");
+    const cartCount = document.getElementById("cart-count");
+
+    function renderProductos() {
+      contenedor.innerHTML = "";
+      const search = document.getElementById("search").value.toLowerCase();
+      const categoria = document.getElementById("filter-category").value;
+      const precioFiltro = document.getElementById("filter-price").value;
+
+      productos.filter(p => {
+        return (!search || p.nombre.toLowerCase().includes(search)) &&
+          (!categoria || p.categoria === categoria) &&
+          (!precioFiltro || (precioFiltro === "low" ? p.precio < 50000 : p.precio >= 50000));
+      }).forEach(p => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center";
+        card.innerHTML = `
+          <img src="${p.imagen}" class="w-full h-48 object-cover mb-4 rounded" />
+          <h3 class="text-xl font-semibold mb-2">${p.nombre}</h3>
+          <p class="mb-2 text-gray-600">$${p.precio.toLocaleString()}</p>
+          <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+
+    function guardarCarritoEnFirebase() {
+      if (userId) {
+        db.ref('carritos/' + userId).set(carrito);
+      }
+    }
+
+    function agregarAlCarrito(id) {
+      carrito.push(id);
+      cartCount.textContent = carrito.length;
+      guardarCarritoEnFirebase();
+    }
+
+    document.getElementById("search").addEventListener("input", renderProductos);
+    document.getElementById("filter-category").addEventListener("change", renderProductos);
+    document.getElementById("filter-price").addEventListener("change", renderProductos);
+
+    firebase.auth().signInAnonymously().then(user => {
+      userId = user.user.uid;
+      db.ref('carritos/' + userId).once('value').then(snapshot => {
+        carrito = snapshot.val() || [];
+        cartCount.textContent = carrito.length;
+      });
+      renderProductos();
+    });
+  </script>
 </body>
 </html>
-

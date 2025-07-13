@@ -2,14 +2,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carrito de Compras</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - GN Amoblamientos</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 p-6">
-  <a href="index.html" class="text-blue-600 underline">&larr; Volver al inicio</a>
-  <h1 class="text-3xl font-bold mt-4 mb-6">Carrito de Compras</h1>
-  <div><p>Aquí aparecerán los productos seleccionados para la compra.</p></div>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-4xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold mb-6">Tu Carrito</h1>
+    <ul id="lista-carrito" class="space-y-4"></ul>
+    <p id="total" class="mt-6 text-xl font-bold"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      databaseURL: "TU_DATABASE_URL",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_STORAGE_BUCKET",
+      messagingSenderId: "TU_SENDER_ID",
+      appId: "TU_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const productos = [
+      { id: 1, nombre: "Silla Moderna", precio: 45000 },
+      { id: 2, nombre: "Mesa Minimalista", precio: 60000 },
+      { id: 3, nombre: "Escritorio Pro", precio: 80000 },
+      { id: 4, nombre: "Silla Clásica", precio: 30000 },
+      { id: 5, nombre: "Mesa de Comedor", precio: 70000 },
+      { id: 6, nombre: "Escritorio Compacto", precio: 40000 },
+    ];
+
+    firebase.auth().signInAnonymously().then(user => {
+      const userId = user.user.uid;
+      db.ref('carritos/' + userId).once('value').then(snapshot => {
+        const carrito = snapshot.val() || [];
+        const lista = document.getElementById("lista-carrito");
+        let total = 0;
+
+        carrito.forEach(id => {
+          const producto = productos.find(p => p.id === id);
+          if (producto) {
+            total += producto.precio;
+            const li = document.createElement("li");
+            li.className = "bg-white p-4 rounded shadow";
+            li.textContent = `${producto.nombre} - $${producto.precio.toLocaleString()}`;
+            lista.appendChild(li);
+          }
+        });
+
+        document.getElementById("total").textContent = "Total: $" + total.toLocaleString();
+      });
+    });
+  </script>
 </body>
 </html>
