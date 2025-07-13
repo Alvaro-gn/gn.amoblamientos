@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GN_amoblamientos</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
   <style>
     .carrito-icono {
       position: fixed;
@@ -23,39 +24,36 @@
       position: fixed;
       bottom: 1rem;
       right: 1rem;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      background: white;
       padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       z-index: 40;
     }
     .contacto-flotante a {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
       margin-bottom: 0.5rem;
+      text-decoration: none;
       color: #1f2937;
+    }
+    .contacto-flotante a img {
+      width: 20px;
+      margin-right: 0.5rem;
     }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
-  <!-- Carrito flotante -->
-  <a href="carrito.html" class="carrito-icono">
-    🛒 <span id="cart-count">0</span>
-  </a>
+  <a href="carrito.html" class="carrito-icono">🛒 <span id="cart-count">0</span></a>
 
-  <!-- Encabezado -->
   <header class="bg-gray-900 text-white text-center py-6 mb-4">
     <h1 class="text-4xl font-bold">GN_amoblamientos</h1>
   </header>
 
-  <!-- Buscador -->
   <section class="max-w-4xl mx-auto px-4 mb-6">
     <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
   </section>
 
-  <!-- Filtros -->
   <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
     <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
       <option value="">Todas las categorías</option>
@@ -70,32 +68,38 @@
     </select>
   </section>
 
-  <!-- Productos -->
-  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-24">
-    <!-- Productos generados por JS -->
-  </section>
+  <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-12"></section>
 
-  <!-- Contacto flotante -->
   <div class="contacto-flotante">
-    <a href="https://wa.me/5491123456789" target="_blank"><i class="fab fa-whatsapp text-green-500"></i> WhatsApp</a>
-    <a href="mailto:contacto@gnamoblamientos.com"><i class="fas fa-envelope text-blue-500"></i> Email</a>
-    <a href="tel:+541123456789"><i class="fas fa-phone text-gray-700"></i> Teléfono</a>
-    <a href="https://www.instagram.com/gn_amoblamientos" target="_blank"><i class="fab fa-instagram text-pink-500"></i> Instagram</a>
+    <a href="https://wa.me/5492615524525" target="_blank"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"/>WhatsApp</a>
+    <a href="tel:+5492615524525"><img src="https://img.icons8.com/ios-filled/50/000000/phone.png"/>+54 9 261 552-4525</a>
+    <a href="mailto:contacto@example.com"><img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png"/>Email</a>
+    <a href="https://instagram.com/GN_amoblamientos" target="_blank"><img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png"/>Instagram</a>
   </div>
 
   <script>
+    const firebaseConfig = {
+      databaseURL: "https://gn-amoblamientos-default-rtdb.firebaseio.com/"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     const productos = [
-      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://images.unsplash.com/photo-1615874959474-d609969a75e4" },
-      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://images.unsplash.com/photo-1598300054361-21f7c90cd70e" },
-      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://images.unsplash.com/photo-1581349485300-5400e3dbcc08" },
-      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90" },
-      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://images.unsplash.com/photo-1616627455421-3ed546bae2b8" },
-      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://images.unsplash.com/photo-1621986213154-01e334e7e7ae" }
+      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/300?text=Silla" },
+      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/300?text=Mesa" },
+      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/300?text=Escritorio" },
+      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/300?text=Silla+Clásica" },
+      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/300?text=Comedor" },
+      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/300?text=Compacto" },
     ];
 
     const contenedor = document.getElementById("productos");
     const cartCount = document.getElementById("cart-count");
     let carrito = [];
+
+    function guardarCarrito() {
+      db.ref("carrito").set(carrito);
+    }
 
     function renderProductos() {
       contenedor.innerHTML = "";
@@ -111,7 +115,7 @@
         );
       }).forEach(p => {
         const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center hover:shadow-lg transition-shadow";
+        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center";
         card.innerHTML = `
           <img src="${p.imagen}" class="w-full h-48 object-cover mb-4 rounded" />
           <h3 class="text-xl font-semibold mb-2">${p.nombre}</h3>
@@ -125,6 +129,7 @@
     function agregarAlCarrito(id) {
       carrito.push(id);
       cartCount.textContent = carrito.length;
+      guardarCarrito();
     }
 
     document.getElementById("search").addEventListener("input", renderProductos);
