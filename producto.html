@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalle del Producto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <a href="index.html" class="block p-4 text-blue-600 hover:underline">← Volver al catálogo</a>
+  <main id="detalle" class="max-w-4xl mx-auto p-4 bg-white shadow-md rounded mt-6">
+    <!-- Contenido generado por JS -->
+  </main>
+
+  <script>
+    const productos = [
+      { id: 1, nombre: "Silla Moderna", categoria: "Sillas", precio: 45000, imagen: "https://via.placeholder.com/300", descripcion: "Silla moderna y elegante para comedor o escritorio." },
+      { id: 2, nombre: "Mesa Minimalista", categoria: "Mesas", precio: 60000, imagen: "https://via.placeholder.com/300", descripcion: "Mesa de estilo minimalista ideal para espacios modernos." },
+      { id: 3, nombre: "Escritorio Pro", categoria: "Escritorios", precio: 80000, imagen: "https://via.placeholder.com/300", descripcion: "Escritorio profesional amplio y funcional." },
+      { id: 4, nombre: "Silla Clásica", categoria: "Sillas", precio: 30000, imagen: "https://via.placeholder.com/300", descripcion: "Diseño clásico que combina con cualquier ambiente." },
+      { id: 5, nombre: "Mesa de Comedor", categoria: "Mesas", precio: 70000, imagen: "https://via.placeholder.com/300", descripcion: "Amplia mesa ideal para comidas familiares." },
+      { id: 6, nombre: "Escritorio Compacto", categoria: "Escritorios", precio: 40000, imagen: "https://via.placeholder.com/300", descripcion: "Perfecto para espacios reducidos." },
+      { id: 13, nombre: "Silla Industrial", categoria: "Sillas", precio: 49000, imagen: "https://via.placeholder.com/300", descripcion: "Estilo industrial con gran resistencia." },
+      { id: 14, nombre: "Mesa de Vidrio", categoria: "Mesas", precio: 88000, imagen: "https://via.placeholder.com/300", descripcion: "Elegante mesa con tapa de vidrio templado." },
+      { id: 15, nombre: "Escritorio Escandinavo", categoria: "Escritorios", precio: 91000, imagen: "https://via.placeholder.com/300", descripcion: "Diseño escandinavo limpio y moderno." },
+      { id: 16, nombre: "Silla Tapizada", categoria: "Sillas", precio: 51000, imagen: "https://via.placeholder.com/300", descripcion: "Silla con tapizado premium." },
+      { id: 17, nombre: "Mesa Robusta", categoria: "Mesas", precio: 93000, imagen: "https://via.placeholder.com/300", descripcion: "Mesa robusta de madera maciza." },
+      { id: 18, nombre: "Escritorio Moderno", categoria: "Escritorios", precio: 97000, imagen: "https://via.placeholder.com/300", descripcion: "Estilo moderno y funcional." },
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("id"));
+    const producto = productos.find(p => p.id === id);
+
+    const container = document.getElementById("detalle");
+    if (producto) {
+      container.innerHTML = `
+        <div class="flex flex-col md:flex-row gap-6">
+          <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full md:w-1/2 rounded shadow" />
+          <div class="flex-1">
+            <h1 class="text-3xl font-bold mb-2">${producto.nombre}</h1>
+            <p class="text-gray-500 mb-4">${producto.descripcion}</p>
+            <p class="text-xl font-semibold mb-1">Precio: $${producto.precio.toLocaleString()}</p>
+            <p class="text-green-600 mb-4">3 cuotas de $${Math.ceil(producto.precio / 3).toLocaleString()}</p>
+            <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
+          </div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = "<p class='text-red-600'>Producto no encontrado.</p>";
+    }
+
+    function agregarAlCarrito(id) {
+      alert("Producto agregado al carrito.");
+    }
+  </script>
+</body>
+</html>

@@ -93,7 +93,13 @@
   { id: 9, nombre: "Escritorio Ejecutivo", categoria: "Escritorios", precio: 92000, imagen: "https://via.placeholder.com/300?text=Escritorio+Ejecutivo" },
   { id: 10, nombre: "Silla Gamer", categoria: "Sillas", precio: 68000, imagen: "https://via.placeholder.com/300?text=Silla+Gamer" },
   { id: 11, nombre: "Mesa Extensible", categoria: "Mesas", precio: 85000, imagen: "https://via.placeholder.com/300?text=Mesa+Extensible" },
-  { id: 12, nombre: "Escritorio Angular", categoria: "Escritorios", precio: 77000, imagen: "https://via.placeholder.com/300?text=Escritorio+Angular" }];
+  { id: 12, nombre: "Escritorio Angular", categoria: "Escritorios", precio: 77000, imagen: "https://via.placeholder.com/300?text=Escritorio+Angular" },
+  { id: 13, nombre: "Silla Industrial", categoria: "Sillas", precio: 49000, imagen: "https://via.placeholder.com/300?text=Silla+Industrial" },
+  { id: 14, nombre: "Mesa de Vidrio", categoria: "Mesas", precio: 88000, imagen: "https://via.placeholder.com/300?text=Mesa+de+Vidrio" },
+  { id: 15, nombre: "Escritorio Escandinavo", categoria: "Escritorios", precio: 91000, imagen: "https://via.placeholder.com/300?text=Escritorio+Escandinavo" },
+  { id: 16, nombre: "Silla Tapizada", categoria: "Sillas", precio: 51000, imagen: "https://via.placeholder.com/300?text=Silla+Tapizada" },
+  { id: 17, nombre: "Mesa Robusta", categoria: "Mesas", precio: 93000, imagen: "https://via.placeholder.com/300?text=Mesa+Robusta" },
+  { id: 18, nombre: "Escritorio Moderno", categoria: "Escritorios", precio: 97000, imagen: "https://via.placeholder.com/300?text=Escritorio+Moderno" }];
 
     const contenedor = document.getElementById("productos");
     const cartCount = document.getElementById("cart-count");
@@ -110,12 +116,17 @@
           (!precioFiltro || (precioFiltro === "low" ? p.precio < 50000 : p.precio >= 50000));
       }).forEach(p => {
         const card = document.createElement("div");
-        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center";
+        card.className = "bg-white rounded-lg shadow p-4 flex flex-col items-center transition transform hover:scale-105 hover:shadow-xl duration-300";
         card.innerHTML = `
           <img src="${p.imagen}" class="w-full h-48 object-cover mb-4 rounded" />
-          <h3 class="text-xl font-semibold mb-2">${p.nombre}</h3>
-          <p class="mb-2 text-gray-600">$${p.precio.toLocaleString()}</p>
-          <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
+          <h3 class="text-xl font-semibold mb-1">${p.nombre}</h3>
+          <p class="text-gray-500 text-sm mb-2">Elegante y funcional</p>
+          <p class="mb-1 text-gray-800 font-bold">$${p.precio.toLocaleString()}</p>
+          <p class="mb-2 text-green-600 text-sm">o 3 cuotas de $${Math.ceil(p.precio / 3).toLocaleString()}</p>
+          <div class="flex gap-2">
+            <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
+            <a href="producto.html?id=${p.id}" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm">Ver más</a>
+          </div>
         `;
         contenedor.appendChild(card);
       });
@@ -148,11 +159,12 @@
   </script>
 
   
+  
   <div class="fixed bottom-4 right-4 bg-white shadow-lg p-4 rounded-lg z-50 text-sm space-y-2">
     <div><span class="mr-1">📞</span><a href="tel:+541112345678" class="hover:underline">+54 11 1234-5678</a></div>
     <div><span class="mr-1">📧</span><a href="mailto:contacto@gnamoblamientos.com" class="hover:underline">contacto@gnamoblamientos.com</a></div>
     <div><span class="mr-1">📷</span><a href="https://instagram.com/gnamoblamientos" target="_blank" class="hover:underline">@gnamoblamientos</a></div>
-    <div><span class="mr-1">💬</span><a href="https://wa.me/5491123456789" target="_blank" class="hover:underline">+54 9 11 2345-6789</a></div>
+    <div><span class="mr-1">💬</span><a href="https://wa.me/5491123456789?text=Hola!%20Estoy%20interesado%20en%20los%20productos%20de%20GN%20Amoblamientos" target="_blank" class="hover:underline text-green-600 font-semibold">Enviar WhatsApp</a></div>
   </div>
 
 </body>
