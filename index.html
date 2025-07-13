@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,12 +45,39 @@
     .producto {
       background-color: white;
       padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .producto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     }
     .producto img {
       width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .precio {
+      font-weight: bold;
+      color: #27ae60;
+      font-size: 1.1rem;
+    }
+    .ver-mas {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
       border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .ver-mas:hover {
+      background-color: #1a242f;
     }
     footer {
       background-color: #2c3e50;
@@ -63,18 +89,13 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      max-width: 500px;
+      max-width: 400px;
       margin: 0 auto;
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     input, textarea {
       padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 1rem;
     }
     button {
       padding: 0.75rem;
@@ -84,18 +105,6 @@
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 1rem;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #219150;
-    }
-    .contact-info {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .contact-info p {
-      margin: 0.5rem 0;
     }
   </style>
 </head>
@@ -118,25 +127,28 @@
   </section>
 
   <section id="catalogo">
-    <h2>Catálogo de Muebles</h2>
+    <h2 style="text-align: center; margin-bottom: 2rem;">Catálogo de Muebles</h2>
     <div class="catalogo">
       <div class="producto">
         <img src="https://via.placeholder.com/300x200" alt="Sofá moderno">
         <h3>Sofá Moderno</h3>
         <p>Comodidad y estilo para tu sala de estar.</p>
-        <p><strong>$500</strong></p>
+        <p class="precio">$500</p>
+        <button class="ver-mas">Ver más</button>
       </div>
       <div class="producto">
         <img src="https://via.placeholder.com/300x200" alt="Comedor 6 puestos">
         <h3>Comedor 6 puestos</h3>
         <p>Elegancia para compartir en familia.</p>
-        <p><strong>$850</strong></p>
+        <p class="precio">$850</p>
+        <button class="ver-mas">Ver más</button>
       </div>
       <div class="producto">
         <img src="https://via.placeholder.com/300x200" alt="Cama Queen">
         <h3>Cama Queen</h3>
         <p>Duerme con estilo y confort.</p>
-        <p><strong>$750</strong></p>
+        <p class="precio">$750</p>
+        <button class="ver-mas">Ver más</button>
       </div>
     </div>
   </section>
@@ -147,18 +159,13 @@
   </section>
 
   <section id="contacto">
-    <h2>Contáctanos</h2>
+    <h2>Contacto</h2>
     <form>
       <input type="text" placeholder="Tu nombre" required>
       <input type="email" placeholder="Tu email" required>
       <textarea placeholder="Tu mensaje" rows="5" required></textarea>
-      <button type="submit">Enviar Mensaje</button>
+      <button type="submit">Enviar</button>
     </form>
-    <div class="contact-info">
-      <p><strong>Email:</strong> contacto@gnamoblamientos.com</p>
-      <p><strong>Teléfono:</strong> +54 11 1234 5678</p>
-      <p><strong>Dirección:</strong> Av. Siempreviva 123, Buenos Aires, Argentina</p>
-    </div>
   </section>
 
   <footer>
