@@ -4,41 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carrito</title>
+  <title>Carrito - GN_amoblamientos</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800">
-  <div class="max-w-3xl mx-auto py-12 px-4">
-    <h1 class="text-3xl font-bold mb-6">Tu carrito completo</h1>
-    <ul id="carrito-lista" class="space-y-4"></ul>
-    <p class="mt-6 text-xl font-bold">Total: $<span id="carrito-total">0</span></p>
-  </div>
-
-  <script>
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    function renderCarrito() {
-      const lista = document.getElementById("carrito-lista");
-      const total = document.getElementById("carrito-total");
-      lista.innerHTML = "";
-      let totalCalc = 0;
-
-      carrito.forEach(item => {
-        totalCalc += item.precio * item.cantidad;
-        const li = document.createElement("li");
-        li.className = "bg-white p-4 rounded shadow";
-        li.innerHTML = \`
-          <p class="font-semibold">\${item.nombre}</p>
-          <p>Cantidad: \${item.cantidad}</p>
-          <p>Subtotal: \$\${(item.precio * item.cantidad).toLocaleString('es-AR')}</p>
-        \`;
-        lista.appendChild(li);
-      });
-
-      total.textContent = totalCalc.toLocaleString('es-AR');
-    }
-
-    renderCarrito();
-  </script>
+  <header class="bg-gray-900 text-white text-center py-6 mb-4">
+    <h1 class="text-3xl font-bold">Carrito de compras</h1>
+  </header>
+  <main class="max-w-4xl mx-auto px-4">
+    <p class="text-lg">Esta sección estará conectada con Firebase para mostrar los productos agregados.</p>
+  </main>
 </body>
 </html>
