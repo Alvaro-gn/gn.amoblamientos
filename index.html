@@ -48,9 +48,12 @@
   <!-- Encabezado -->
   
     
-<header class="bg-gray-900 text-white py-8 mb-6">
-  <img src="logo.jpg" alt="GN_amoblamientos" class="w-full h-auto max-h-[400px] object-cover mb-4">
-  <div class="max-w-5xl mx-auto px-4 space-y-4">
+
+<header class="relative bg-gray-900 text-white py-8 mb-6">
+  <div class="absolute inset-0">
+    <img src="logo.jpg" alt="GN_amoblamientos" class="w-full h-full object-cover opacity-20" />
+  </div>
+  <div class="relative z-10 max-w-5xl mx-auto px-4 space-y-4">
     <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded text-black" />
     <div class="flex flex-col md:flex-row gap-4">
       <select id="filter-category" class="p-2 border rounded text-black w-full md:w-1/2">
@@ -67,6 +70,7 @@
     </div>
   </div>
 </header>
+
 
     
 
