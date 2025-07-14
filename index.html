@@ -46,43 +46,29 @@
   </a>
 
   <!-- Encabezado -->
-  
-    
-
-
-
-<header class="relative bg-gray-900 text-white py-40 mb-12">
-  <div class="absolute inset-0">
-    <img src="logo.jpg" alt="GN_amoblamientos" class="w-full h-full object-cover opacity-20" />
-  </div>
-  <div class="relative z-10 max-w-5xl mx-auto px-4 mt-16 space-y-10">
-    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-4 border rounded text-black shadow" />
-    <div class="flex flex-col md:flex-row gap-4">
-      <select id="filter-category" class="p-3 border rounded text-black w-full md:w-1/2 shadow">
-        <option value="">Todas las categorías</option>
-        <option value="Sillas">Sillas</option>
-        <option value="Mesas">Mesas</option>
-        <option value="Escritorios">Escritorios</option>
-      </select>
-      <select id="filter-price" class="p-3 border rounded text-black w-full md:w-1/2 shadow">
-        <option value="">Todos los precios</option>
-        <option value="low">Menor a $50.000</option>
-        <option value="high">Mayor a $50.000</option>
-      </select>
-    </div>
-  </div>
-</header>
-
-
-
-
-    
+  <header class="bg-gray-900 text-white text-center py-6 mb-4">
+    <h1 class="text-4xl font-bold">GN_amoblamientos</h1>
+  </header>
 
   <!-- Buscador -->
-  
+  <section class="max-w-4xl mx-auto px-4 mb-6 mt-36">
+    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
+  </section>
 
   <!-- Filtros -->
-  
+  <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
+    <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
+      <option value="">Todas las categorías</option>
+      <option value="Sillas">Sillas</option>
+      <option value="Mesas">Mesas</option>
+      <option value="Escritorios">Escritorios</option>
+    </select>
+    <select id="filter-price" class="p-2 border rounded w-full md:w-1/2">
+      <option value="">Todos los precios</option>
+      <option value="low">Menor a $50.000</option>
+      <option value="high">Mayor a $50.000</option>
+    </select>
+  </section>
 
   <!-- Productos -->
   <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-24">
@@ -94,7 +80,7 @@
     <a href="https://wa.me/5491123456789" target="_blank"><i class="fab fa-whatsapp text-green-500"></i> WhatsApp</a>
     <a href="mailto:contacto@gnamoblamientos.com"><i class="fas fa-envelope text-blue-500"></i> Email</a>
     <a href="tel:+541123456789"><i class="fas fa-phone text-gray-700"></i> Teléfono</a>
-    <a href="https://www.instagram.com/gn_amoblamientos" target="_blank"><i class="fab fa-instagram text-pink-500"></i> <i class="fab fa-instagram mr-2"></i>@gn_amoblamientos</a>
+    <a href="https://www.instagram.com/gn_amoblamientos" target="_blank"><i class="fab fa-instagram text-pink-500"></i> Instagram</a>
   </div>
 
   <script>
