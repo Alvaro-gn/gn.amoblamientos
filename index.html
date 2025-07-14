@@ -47,30 +47,34 @@
 
   <!-- Encabezado -->
   
-    <header class="bg-gray-900 text-white py-0 mb-4">
-      <img src="logo.jpg" alt="GN_amoblamientos" class="w-full h-auto max-h-[300px] object-cover">
-    </header>
+    
+<header class="bg-gray-900 text-white py-8 mb-6">
+  <img src="logo.jpg" alt="GN_amoblamientos" class="w-full h-auto max-h-[400px] object-cover mb-4">
+  <div class="max-w-5xl mx-auto px-4 space-y-4">
+    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded text-black" />
+    <div class="flex flex-col md:flex-row gap-4">
+      <select id="filter-category" class="p-2 border rounded text-black w-full md:w-1/2">
+        <option value="">Todas las categorías</option>
+        <option value="Sillas">Sillas</option>
+        <option value="Mesas">Mesas</option>
+        <option value="Escritorios">Escritorios</option>
+      </select>
+      <select id="filter-price" class="p-2 border rounded text-black w-full md:w-1/2">
+        <option value="">Todos los precios</option>
+        <option value="low">Menor a $50.000</option>
+        <option value="high">Mayor a $50.000</option>
+      </select>
+    </div>
+  </div>
+</header>
+
     
 
   <!-- Buscador -->
-  <section class="max-w-4xl mx-auto px-4 mb-6">
-    <input id="search" type="text" placeholder="Buscar productos..." class="w-full p-2 border rounded" />
-  </section>
+  
 
   <!-- Filtros -->
-  <section class="max-w-4xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
-    <select id="filter-category" class="p-2 border rounded w-full md:w-1/2">
-      <option value="">Todas las categorías</option>
-      <option value="Sillas">Sillas</option>
-      <option value="Mesas">Mesas</option>
-      <option value="Escritorios">Escritorios</option>
-    </select>
-    <select id="filter-price" class="p-2 border rounded w-full md:w-1/2">
-      <option value="">Todos los precios</option>
-      <option value="low">Menor a $50.000</option>
-      <option value="high">Mayor a $50.000</option>
-    </select>
-  </section>
+  
 
   <!-- Productos -->
   <section id="productos" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto mb-24">
